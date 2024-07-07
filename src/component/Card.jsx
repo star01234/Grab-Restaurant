@@ -1,5 +1,5 @@
 import React from "react";
-
+import Swal from 'sweetalert2';
 
 const Card = ({ id, img, type, title }) => {
   const handleDelete = async (id) => {
