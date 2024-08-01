@@ -2,6 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home.jsx";
 import Add from "../pages/Add.jsx";
 import Edit from "../pages/Edit.jsx";
+import Login from "../pages/Login.jsx";
+import Register from "../pages/Register.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -15,7 +18,16 @@ const router = createBrowserRouter([
   {
     path: "/edit/:id",
     element: <Edit />,
+  },
+  {
+    path: "/Login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register/>
   }
+  
 ]);
 
 export default router;

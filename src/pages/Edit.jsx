@@ -54,7 +54,7 @@ const Edit = () => {
           title: 'สำเร็จ!',
           text: 'แก้ไขข้อมูลร้านอาหารเรียบร้อย!'
         }).then(() => {
-          navigate('/'); // นำทางกลับไปยังหน้าแรก
+          navigate('/'); 
         });
       } else {
         throw new Error('Failed to update restaurant');
