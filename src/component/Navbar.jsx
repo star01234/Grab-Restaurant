@@ -1,8 +1,11 @@
 import React from "react";
 import LoginButton from "./LoginButton";
 import RegisterButton from "./RegisterButton";
+import { useAuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
+  //const {user, logout} = useAuthContext();
+  //console.log("user,", user);
   return (
          <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

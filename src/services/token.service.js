@@ -18,3 +18,5 @@ const TokenService = {
   getUser,
   removeUser,
 };
+
+export default TokenService;
