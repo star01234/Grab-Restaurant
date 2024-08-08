@@ -13,13 +13,12 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async () => {
     try {
-      const register = await AuthService.Register(
+      const register = await AuthService.register(
         user.username,
         user.email,
         user.password
@@ -30,12 +29,17 @@ const Register = () => {
           text: register.data.message,
           icon: "success",
         });
-        navigate("/");
+        setUser({
+          username: "",
+          email: "",
+          password: "",
+        });
+        navigate("/login");
       }
     } catch (error) {
       Swal.fire({
         title: "User Registration",
-        text: error.response.data.message,
+        text: error.response.data.message || error.message,
         icon: "error",
       });
     }
