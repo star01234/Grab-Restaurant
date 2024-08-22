@@ -9,7 +9,6 @@ const Login = () => {
     username: "",
     password: "",
   });
-  //const { login } = useAuthContext();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -17,26 +16,26 @@ const Login = () => {
     setUser((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
     try {
       const currentUser = await AuthService.login(user.username, user.password);
       if (currentUser.status === 200) {
         Swal.fire({
-          //title: "Login Successful",
-          text: currentUser.data.message,
+          title: "User Login",
+          text: "Login successfully!",
           icon: "success",
         });
         setUser({
           username: "",
           password: "",
         });
-        login(currentUser);
         navigate("/");
       }
     } catch (error) {
       Swal.fire({
-        title: "Login Failed",
-        text: error.message,
+        title: "User Login",
+        text: error.response.data.message || error.message,
         icon: "error",
       });
     }
@@ -99,6 +98,7 @@ const Login = () => {
       <button
         type="button"
         className="text-gray-900 bg-gradient-to-r from-red-200 via-red-400 to-red-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        onClick={() => setUser({ username: "", password: "" })}
       >
         Cancel
       </button>

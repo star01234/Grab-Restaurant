@@ -1,5 +1,5 @@
 import api from "./api";
-import TokenService from "./token.service";
+import TokenServer from "./token.service";
 
 const API_URL = "/api/v1/auth";
 
@@ -8,16 +8,20 @@ const register = async (username, email, password) => {
 };
 
 const login = async (username, password) => {
-  const response = await api.post(API_URL + "signin", {username, password});
-  if(response.data.accessToken){
-    localStorage.setItem("accessToken", JSON.stringify(response.data.accessToken));
-    localStorage.setItem("user",JSON.stringify(response));
-  }return response;
-}
+  const response = await api.post(API_URL + "/signin", { username, password });
+  if (response.data.accessToken) {
+    localStorage.setItem(
+      "accessToken",
+      JSON.stringify(response.data.accessToken)
+    );
+    localStorage.setItem("user", JSON.stringify(response));
+  }
+  return response.data;
+};
 
 const AuthService = {
   register,
   login,
-};
+};  
 
 export default AuthService;
