@@ -4,6 +4,24 @@ import RegisterButton from "./RegisterButton";
 import { useAuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
+  const { user } = useAuthContext();
+  const menus = {
+    ROLES_ADMIN: [
+      { name: "Add restaurant", link: "/add" },
+      { name: "Search", link: "/search" },
+    ],
+    ROLES_USER: [
+      {
+        name: "Search",
+        link: "/search",
+      },
+    ],
+    ROLES_MODERATOR: [
+      { name: "Add restaurant", link: "/add" },
+      { name: "Search", link: "/search" },
+    ],
+  };
+
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -57,10 +75,30 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="flex-none">
-          <LoginButton />
-          <RegisterButton />
-        </div>
+        <div className="navbar-end space-x-2">
+        {user && (
+          <div>
+            Welcome,{" "}
+            <span className="text-red-500">
+              {user.name}
+              {""}
+              {user.roles.map((role, index) => (
+                <div key={index} className="badge text-xs badge-accent">
+                  {role}
+                </div>
+              ))}
+            </span>
+          </div>
+        )}
+        {user ? (
+          <UserProfile />
+        ) : (
+          <div className="space-x-2">
+            <RegisterButton />
+            <LoginButton />
+          </div>
+        )}
+      </div>  
       </div>
     </nav>
   );
